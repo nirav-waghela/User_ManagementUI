@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#signupForm {
+  padding-top: 30px;
+}
+
+#loginForm{
+  padding-top: 30px;
+}
+
+.is-invalid{
+  border-color: #dc3545
+}
+.invalid-feedback{
+  width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+.center {
+  margin: auto;
+  width: 10%;
+  padding: 10px;
+}
