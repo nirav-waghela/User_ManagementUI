@@ -7,25 +7,25 @@ class AddProduct extends Component {
     render() {
         return (
             <Fragment>
-                <div><h4>Create Product</h4></div>
+                
                 <Formik
-                    initialValues={{ name: '', description: '', category: '' }}
+                    initialValues={{ groupName: '', groupDescription: '', groupCategory: '' }}
                     validate={values => {
                         let errors = {};
-                        if (values.name === "") {
+                        if (values.groupName === "") {
                             console.log(values)
-                            errors.name = "Product Name is Required"
+                            errors.groupName = "Group Name is Required"
                         }
-                        if (values.category === "") {
-                            errors.category = "Product Category is Required"
-                        } if (values.description === "") {
-                            errors.description = "Product Description is Required"
+                        if (values.groupCategory === "") {
+                            errors.categroupCategorygory = "Group Category is Required"
+                        } if (values.groupDescription === "") {
+                            errors.groupDescription = "group Description is Required"
                         }
                     }}
                     onSubmit={(values) => {
                         console.log(values)
                         values.issueDate = new Date()
-                        this.props.addProduct(values)
+                        this.props.createGroup({...values,groupStatus:false})
                             .then(res => {
                                 console.log(res)
                                 if(res.payload.success){
@@ -46,14 +46,14 @@ class AddProduct extends Component {
                                 <Row>
                                     <Col className='justify-content-center'>
                                         <Form.Group controlId="formBasicProductName">
-                                            <Form.Label>Product Name</Form.Label>
+                                            <Form.Label>Group Name</Form.Label>
                                             <Field
                                                 type='text'
-                                                name='name'
+                                                name='groupName'
                                                 className={`form-control ${touched.name && errors.name ? "is-invalid" : ""}`} />
                                             <ErrorMessage
                                                 component='div'
-                                                name='name'
+                                                name='groupName'
                                                 className="invalid-feedback" />
                                         </Form.Group>
                                     </Col>
@@ -61,14 +61,14 @@ class AddProduct extends Component {
                                 <Row>
                                     <Col className='justify-content-center'>
                                         <Form.Group controlId="formBasicProductDescription">
-                                            <Form.Label>Product Description</Form.Label>
+                                            <Form.Label>Group Description</Form.Label>
                                             <Field
                                                 type='text'
-                                                name='description'
+                                                name='groupDescription'
                                                 className={`form-control ${touched.description && errors.description ? "is-invalid" : ""}`} />
                                             <ErrorMessage
                                                 component='div'
-                                                name='description'
+                                                name='groupDescription'
                                                 className='invalid-feedback' />
                                         </Form.Group>
                                     </Col>
@@ -76,14 +76,14 @@ class AddProduct extends Component {
                                 <Row>
                                     <Col className='justify-content-center'>
                                         <Form.Group controlId="formBasicProductCategory">
-                                            <Form.Label>Product Category</Form.Label>
+                                            <Form.Label>Group Category</Form.Label>
                                             <Field
                                                 type='text'
-                                                name='category'
+                                                name='groupCategory'
                                                 className={`form-control ${touched.category && errors.category ? "is-invalid" : ""}`} />
                                             <ErrorMessage
                                                 component='div'
-                                                name='category'
+                                                name='groupCategory'
                                                 className="invalid-feedback" />
                                         </Form.Group>
                                         <Button variant="primary" type="submit">

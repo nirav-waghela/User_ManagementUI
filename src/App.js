@@ -7,6 +7,7 @@ import UserLogin from './containers/User-login'
 import PrivateRoute from './PrivateRoute'
 import AddProductWrapper from './containers/Add-Product'
 import Product from './containers/products'
+import AdminWrapper from './containers/AdminWrapper';
  
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <NavMenu />
         <Route path= '/login' component={UserLogin} />
         <Route path='/' exact component={UserRegistration} />
+        <PrivateRoute path='/admin' exact component={AdminWrapper} />
         <PrivateRoute path='/addProduct' exact component={AddProductWrapper} />
         <PrivateRoute path='/dashboard' exact component={Product} />
       </div>

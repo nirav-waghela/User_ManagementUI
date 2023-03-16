@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { Formik, Field, ErrorMessage } from 'formik'
 import {withRouter} from 'react-router-dom'
+import bcrypt from 'bcryptjs'
+
+const salt = bcrypt.genSaltSync(12)
 
 
 class Login extends Component {
@@ -20,18 +23,25 @@ class Login extends Component {
                     if (values.password === "") {
                         errors.password = "Password is required";
                     } else if (values.password.length < 3) {
-                        errors.password = "Password must be 3 characters at minimum";
+                        errors.password = "Password must be 8 characters at minimum";
                     }
                     return errors;
                 }}
                 onSubmit={(values)=>{
-                    this.props.validateUser(values)
+                    const hashedPassword = bcrypt.hashSync(values.password, salt)
+                    this.props.validateUser({...values,password:hashedPassword})
                     .then(res=>{
                         console.log(res)
-                        if(res.payload.success){
-                            alert(res.payload.message)
+                        if(res.payload.success && res.payload.userData.approved && res.payload.userData.role === 1){
+                            // alert(res.payload.message)
                             localStorage.setItem('token',JSON.stringify(res.payload.token))
                             this.props.history.push('/dashboard')
+                        }else if (res.payload.success  && res.payload.userData.role === 0){
+                            localStorage.setItem('token', JSON.stringify(res.payload.token))
+                            this.props.history.push('/admin')
+                        }
+                        else{
+                            alert('Admin needs to approve your request')
                         }
                     })
                     .catch(err => console.log(err))

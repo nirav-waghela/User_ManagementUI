@@ -4,7 +4,11 @@ import {
     ADD_PRODUCT,
     UPDATE_PRODUCT,
     DELETE_PRODUCT,
-    GET_PRODUCTS
+    GET_PRODUCTS,
+    CHANGE_STATUS,
+    GET_USERS,
+    GET_GROUPS,
+    CHANGE_GROUP_STATUS
 } from '../actions/index'
 
 
@@ -91,6 +95,60 @@ export function Root(state = {}, action) {
             }
         case `${GET_PRODUCTS}_FAILURE`:
             return {
+                ...state
+            }
+        case `${GET_USERS}_REQUEST`:
+            return{
+                ...state
+            }
+        case `${GET_USERS}`:
+            console.log(action,"inseide reducer +++++++")
+            return{
+                ...state,
+                allUsers:action.payload
+            }
+        case `${GET_USERS}_FAILURE`:
+            return{
+                ...state
+            }
+        case `${GET_GROUPS}_REQUEST`:
+            return{
+                ...state
+            }
+        case `${GET_GROUPS}`:
+            console.log(action,"inseide reducer groups")
+            return{
+                ...state,
+                allGroups:action.payload.allGroups
+            }
+        case `${GET_GROUPS}_FAILURE`:
+            return{
+                ...state
+            }
+        case `${CHANGE_GROUP_STATUS}_REQUEST`:
+            return{
+                ...state
+            }
+        case `${CHANGE_GROUP_STATUS}`:
+            console.log(action.data,"++++++===============")
+            return{
+                ...state
+            }
+        case `${CHANGE_GROUP_STATUS}_FAILURE`:
+            return{
+                ...state
+            }
+        case `${CHANGE_STATUS}_REQUEST`:
+            return{
+                ...state
+            }
+        case `${CHANGE_STATUS}`:
+            console.log(action.data,"++++++===============")
+            return{
+                ...state
+            }
+        case `${CHANGE_STATUS}_FAILURE`:
+            return{
                 ...state
             }
         default:

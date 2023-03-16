@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addProduct} from '../store/actions'
+import {addProduct,createGroup} from '../store/actions'
 import AddProduct from '../components/addProduct'
 
 class AddProductWrapper extends Component{
     render(){
         console.log(this.props)
         return(
-            <AddProduct addProduct={this.props.addProduct}/>
+            <AddProduct createGroup={this.props.createGroup}/>
         )
     }
 }
@@ -19,7 +19,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return{
-        addProduct:(payload)=> dispatch(addProduct(payload))
+        createGroup:(payload)=> dispatch(createGroup(payload))
     }
 }
 
